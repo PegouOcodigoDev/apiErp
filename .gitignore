@@ -1,0 +1,78 @@
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Python
+*.py[cod]
+*.pyo
+*.pyd
+__pycache__/
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Editor de código
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+
+# Configurações locais
+.local/
+.env
+
+# Distribuições
+*.egg-info/
+*.egg
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+
+# Arquivos de pacotes
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Arquivos de compilação
+*.manifest
+*.spec
+
+# Arquivos do mypy
+.mypy_cache/
+
+# Celery
+celerybeat-schedule
+
+# Coverage
+.coverage
+*.cover
+.hypothesis/
+.tox/
+.nox/
+
+# Arquivos de teste
+coverage.xml
+nosetests.xml
+test_*.log
+
+# Arquivos do PyCharm
+.pytest_cache/
