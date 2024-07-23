@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.exceptions import APIException
 
 from companies.models import Enterprise, Employee
-from accounts.models import UserPermission, GroupsPermission
+from accounts.models import UserGroups, GroupsPermission
 
 class Base(APIView):
     def get_enterprise_user(self, user_id):

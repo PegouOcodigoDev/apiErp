@@ -18,13 +18,13 @@ def check_permission(user, method, permission_to):
     elif method == 'DELETE':
         required_permision = 'delete_' + permission_to
 
-    groups = UserGroups.objects.values('group_id').filter(user_id=user.id).all()
+    groups_permission = UserGroups.objects.values('group_id').filter(user_id=user.id).all()
 
-    for group in groups:
-        permissions = GroupsPermission.objects.values('permission_id').filter(group_id=group['group_id']).all()
+    for group in groups_permission:
+        permissions = GroupsPermission.objects.values('permission_id').filter(group_id=group).all()
 
         for permission in permissions:
-            if Permission.objects.filter(id=permission['permission_id'], codename=required_permision).exists():
+            if Permission.objects.filter(id=permission, codename=required_permision).exists():
                 return True
 
 

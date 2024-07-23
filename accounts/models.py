@@ -22,5 +22,5 @@ class GroupsPermission(models.Model):
 
 class UserGroups(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    permission = models.ForeignKey(Permission, on_delete=models.CASCADE)
+    group = models.ForeignKey(GroupsPermission, on_delete=models.CASCADE)
 

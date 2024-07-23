@@ -1,5 +1,5 @@
 from accounts.models import UserGroups, GroupsPermission, Group
-from models import Employee, TaskStatus, Task
+from companies.models import Employee, TaskStatus, Task
 
 from rest_framework import serializers
 from django.contrib.auth.models import Permission
