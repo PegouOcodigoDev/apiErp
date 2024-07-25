@@ -9,7 +9,7 @@ class UserView(Base):
     permission_classes = [IsAuthenticated]
     def get(self, request):
         user = User.objects.filter(id=request.user.id).first()
-        enterprise = self.get_enterprise_user(user)
+        enterprise = self.get_enterprise_permissions(user.id)
 
         serializer = UserSerializer(user)
 

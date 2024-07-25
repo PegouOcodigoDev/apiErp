@@ -14,15 +14,12 @@ class Signin(Base):
 
         user = Authentication.signin(email=email, password=password)
 
-        enterprise = self.get_enterprise_user(user.id)
-
         serializer = UserSerializer(user)
 
         token = RefreshToken.for_user(user)
 
         return Response({
             "user": serializer.data,
-            "enterprise": enterprise,
             "refresh": str(token),
             "acess": str(token.access_token),
         })

@@ -32,22 +32,22 @@ class EmployeesPermission(permissions.BasePermission):
     message = 'O usuario não tem permissao para gerenciar os funcionarios'
 
     def has_permission(self, request: HttpRequest, _view):
-        return check_permission(HttpRequest.user, HttpRequest.method, permission_to='employee')
+        return check_permission(request.user, request.method, permission_to='employee')
 
 class GroupsPermission(permissions.BasePermission):
     message = 'O usuario não tem permissao para gerenciar os grupos'
 
     def has_permission(self, request: HttpRequest, _view):
-        return check_permission(HttpRequest.user, HttpRequest.method, permission_to='group')
+        return check_permission(request.user, request.method, permission_to='group')
 
 class GroupsPermissionsPermission(permissions.BasePermission):
     message = 'O usuario não tem permissao para gerenciar as permissoes'
 
     def has_permission(self, request: HttpRequest, _view):
-        return check_permission(HttpRequest.user, HttpRequest.method, permission_to='permission')
+        return check_permission(request.user, request.method, permission_to='permission')
 
 class TaskPermission(permissions.BasePermission):
     message = 'O usuario não tem permissao para gerenciar as tarefas'
 
     def has_permission(self, request: HttpRequest, _view):
-        return check_permission(HttpRequest.user, HttpRequest.method, permission_to='task')           
+        return check_permission(request.user, request.method, permission_to='task')           

@@ -10,12 +10,12 @@ from rest_framework.exceptions import APIException
 class Employees(Base):
     permission_classes=[EmployeesPermission]
 
-    def get(self, request:Request):
+    def get(self, request):
         enterprise_id = self.get_enterprise_id(request.user.id)
 
-        owner_id = Enterprise.objects.values('user_id').filter(enterprise_id=enterprise_id).first()
+        owner_id = Enterprise.objects.values('user_id').filter(id=enterprise_id).first()
 
-        employees = Employee.objects.filter(enterprise_id=enterprise_id).exclude(user_id=owner_id).all()
+        employees = Employee.objects.filter(enterprise_id=enterprise_id).exclude(user_id=owner_id['user_id']).all()
 
         serializer = EmployeesSerializer(employees, many=True)
 

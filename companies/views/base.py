@@ -11,7 +11,7 @@ class Base(APIView):
         if emplpoyee:
             return emplpoyee.enterprise.id
         
-        return owner.id
+        return owner.user.id
     
     def get_employee(self, user_id):
         enterprise_id = self.get_enterprise_id(user_id)
