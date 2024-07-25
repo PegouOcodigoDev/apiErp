@@ -1,6 +1,6 @@
 from companies.views.base import Base
 from companies.utils.exceptions import RequiredFields
-from companies.utils.permissions import GroupsPermission
+from companies.utils.permissions import GroupsPermissions
 from companies.serializers import GroupSerializer
 from accounts.models import Group, GroupsPermission
 from rest_framework.views import Response, Request
@@ -9,7 +9,7 @@ from django.contrib.auth.models import Permission
 
 
 class Groups(Base):
-    permission_classes = [GroupsPermission]
+    permission_classes = [GroupsPermissions]
 
     def get(self, request:Request):
         enterprise_id = self.get_enterprise_id(request.user.id)
@@ -47,11 +47,13 @@ class Groups(Base):
         except ValueError:
             created_group.delete()
             raise APIException("Envie as permissões no formato correto")
+        except TypeError:
+            raise APIException("Envie os argumentos corretos")
         
         return Response({"sucess": True})
 
 class GroupDetail(Base):
-    permission_classes = [GroupsPermission]
+    permission_classes = [GroupsPermissions]
 
     def get(self, request:Request, id):
         enterprise_id = self.get_enterprise_id(request.user.id)
