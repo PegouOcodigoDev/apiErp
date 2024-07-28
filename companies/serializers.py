@@ -102,7 +102,7 @@ class TaskSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'description',
-            'due_data',
+            'due_date',
             'created_at',
             'status',
             'employee'

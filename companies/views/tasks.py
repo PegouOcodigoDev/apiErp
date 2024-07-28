@@ -4,6 +4,7 @@ from companies.serializers import TaskSerializer
 from companies.models import Task
 from rest_framework.views import Response, Request
 from companies.utils.validators import Validate
+from datetime import datetime
 
 class Tasks(Base):
     permission_classes = [TaskPermission]
@@ -18,19 +19,21 @@ class Tasks(Base):
         title = request.data.get('title')
         description = request.data.get('description')
         status_id = request.data.get('status_id')
-        due_data = request.data.get('due_data')
+        due_date = request.data.get('due_date')
 
         employee = self.get_employee(request.user.id)
 
-        
-        validated_data = Validate.validate_data(due_data, title)
+        validated_data = Validate.validate_data(due_date=due_date, title=title)
 
         task = Task.objects.create(title=validated_data['title'], 
                                    description=description, 
-                                   due_data=validated_data['due_data'], 
+                                   due_date=validated_data['due_date'], 
                                    employee_id=employee.id, 
                                    enterprise_id=employee.enterprise.id, 
                                    status_id=status_id)
+        
+        task.created_at = datetime.now()
+        task.save()
         
         serializer = TaskSerializer(task)
 
@@ -52,10 +55,13 @@ class TaskDetail(Base):
         status_id = request.data.get('status_id', task.status.id)
         due_date = request.data.get('due_date', task.due_date)
 
-        if due_date != task.due_data:
-            due_date = Validate.data_validate(due_date)
+        if due_date != task.due_date:
+            data = Validate.validate_data(due_date=due_date)
+            due_date = data['due_date']
         
-        task = Validate.updated_data(task, title, description, status_id, due_date)
+        task = Validate.validate_updated_data(task, title=title, description=description, status_id=status_id, due_date=due_date)
+
+        task.updated_at = datetime.now()
 
         task.save()
 

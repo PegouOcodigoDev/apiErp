@@ -40,7 +40,7 @@ class Base(APIView):
         return status
     
     def get_task(self, task_id):
-        task = Task.objects.filter(task_id=task_id).first()
+        task = Task.objects.filter(id=task_id).first()
 
         if not task:
             raise NotFoundTask

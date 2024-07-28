@@ -20,7 +20,7 @@ class TaskStatus(models.Model):
 class Task(models.Model):
     title = models.TextField()
     description = models.TextField(null=True)
-    due_data = models.DateTimeField(null=True)
+    due_date = models.DateTimeField(null=True)
     created_at = models.DateTimeField(null=True)
     updated_at = models.DateTimeField(null=True)
     status = models.ForeignKey(TaskStatus, on_delete=models.CASCADE)
