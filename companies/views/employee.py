@@ -6,6 +6,7 @@ from accounts.auth import Authentication
 from accounts.models import User, UserGroups
 from rest_framework.views import Request,Response, status
 from rest_framework.exceptions import APIException
+from django.db.models import F
 
 class Employees(Base):
     permission_classes=[EmployeesPermission]
@@ -15,7 +16,7 @@ class Employees(Base):
 
         owner_id = Enterprise.objects.values('user_id').filter(id=enterprise_id).first()
 
-        employees = Employee.objects.filter(enterprise_id=enterprise_id).exclude(user_id=owner_id['user_id']).all()
+        employees = Employee.objects.filter(enterprise_id=enterprise_id).exclude(user_id=owner_id['user_id']).annotate(user_name=F('user_name')).order_by('user_name')
 
         serializer = EmployeesSerializer(employees, many=True)
 

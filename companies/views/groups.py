@@ -14,7 +14,7 @@ class Groups(Base):
     def get(self, request:Request):
         enterprise_id = self.get_enterprise_id(request.user.id)
 
-        groups = Group.objects.filter(enterprise_id=enterprise_id).all()
+        groups = Group.objects.filter(enterprise_id=enterprise_id).all().order_by("name")
 
         serializer = GroupSerializer(groups, many=True)
 
